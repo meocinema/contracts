@@ -1,7 +1,7 @@
 {
   "name": "@meocinema/contracts",
   "description": "Protobuf contracts for MeoCinema services",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "meolex",
   "dependencies": {
     "@bufbuild/protobuf": "^2.10.2",
@@ -16,5 +16,9 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meocinema/contracts"
   }
 }
