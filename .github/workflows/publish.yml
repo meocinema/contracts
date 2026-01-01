@@ -1,0 +1,39 @@
+name: "Publish Package"
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    name: "Publish to npm"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Get Source Code"
+        uses: actions/checkout@v4
+
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: "Update npm to Latest Version"
+        run: |
+          echo "Current npm version: $(npm --version)"
+          npm install -g npm@latest
+          echo "Updated npm version: $(npm --version)"
+
+      - name: "Install Dependencies"
+        run: npm ci
+
+      - name: "Generate TS Protobuf"
+        run: npm run generate
+
+      - name: "Publish Package"
+        run: npm publish --provenance --access public
